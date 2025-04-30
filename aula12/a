@@ -1,0 +1,162 @@
+1. Strings
+2. Exercício
+3. Lendo string do teclado
+4. Exercício
+5. <string.h>
+5.1. Procurar caractere
+5.2. Exercício
+5.3. Tamanho de string
+5.4. Exercício
+5.5. Concatenar strings
+5.6. Exercício
+5.7. Comparando
+6. Envio
+1. Strings
+Vetores podem guardar qualquer tipo de dado:
+
+int x[3] = { 8, 4, 2 };
+Mas todos os itens devem ser do mesmo tipo:
+
+char vogais[5] = { 'a', 'e', 'i', 'o', 'u' };
+Uma palavra (string) em C é armazenada em um vetor de char com um caractere a mais no final. Esse é o caractere null: '\0'
+
+char nome[6] = "Mauro";
+
+printf("Nome: %s\n", nome);
+Vamos percorrer todos as letras:
+
+char nome[6] = "Mauro";
+
+for(int i = 0; i < 6; i++) {
+  printf("Letra: %c\n", nome[i]);
+}
+Assim podemos inicializar a string com aspas (") ou chaves ({ e }):
+
+char nome[6] = { 'M', 'a', 'u', 'r', 'o', '\0' };
+
+printf("Nome: %s\n", nome);
+2. Exercício
+Crie um programa em C que imprime seu nome assim:
+Nome: Fulano
+
+* F * u * l * a * n * o *
+3. Lendo string do teclado
+Em C, precisamos usar um tamanho de vetor que possa armazenar a string digitada, a variável nome pode armazenar nomes de até 9 letras:
+
+char nome[10];
+
+scanf("%9s", nome);
+
+printf("%s", nome);
+Note que não é necessário usar &nome já que a nome é um vetor e vetores são passados por referência para funções como scanf().
+
+Se não usar %9s o usuário poderá digitar mais de 9 letras.
+
+4. Exercício
+Se listarmos todos os números naturais menores que 10 múltiplos de 3 ou 5, obtemos 3, 5, 6 e 9. A soma desses múltiplos é 23. Crie um programa em C que encontre a soma de todos os múltiplos de 3 ou 5 abaixo de um número digitado pelo usuário.
+Crie um programa em C que recebe uma senha de um usuário e se a senha for igual à palavra "azimo" mostre a mensagem: "Seja bem vindo!" e se o usuário errar a senha, mostre a mensagem: "Senha errada. Tentativas restantes: 2", se o usuário errar 3 vezes mostra a mensagem: "Tente novamente mais tarde".
+5. <string.h>
+Algumas funções de string estão definidas na biblioteca <string.h>
+
+5.1. Procurar caractere
+A função strchr() localiza um char dentro de uma string.
+
+A função retorna um ponteiro para a primeira ocorrência de char.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char palavra[] = "Fulano";
+  char * posicao;
+  char letra = 'l';
+
+  posicao = strchr(palavra, letra);
+  printf("Posicao: %s\n", posicao);
+
+  return 0;
+}  
+Se char não for encontrada o retorno é NULL:
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char palavra[] = "Fulano";
+  char * posicao;
+  char letra = 'z';
+
+  posicao = strchr(palavra, letra);
+
+  if( posicao != NULL ) {
+    printf("Posicao: %s\n", posicao);
+  } else {
+    printf("Nao encontrada!");
+  }
+
+  return 0;
+}  
+Quando um ponteiro não aponta para nenhum endereço ele é NULL.
+
+5.2. Exercício
+Crie um programa em C que recebe uma palavra de até 5 letras. Receba em seguida uma letra e informe se a letra foi encontrada ou não na palavra. Até que o usuário erre 3 vezes.
+5.3. Tamanho de string
+A função strlen() recebe uma string e retorna o tamanho sem contar '\0'.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char senha[20];
+  printf("Digite a senha: ");
+  scanf("%19s", senha);
+
+  int tamanho = strlen(senha);
+
+  printf("Tamanho: %d", tamanho);
+
+  return 0;
+}  
+5.4. Exercício
+Crie um programa que recebe uma senha e determina se ela possui 8 ou mais caracteres. Se for menor que 8 mostre a mensagem: "Erro na senha". Se for maior ou igual a 8 imprima: "Senha conforme".
+5.5. Concatenar strings
+A função strcat() junta (concatena) duas strings.
+
+A primeira string deve ter espaço suficiente para armazenar o resultado da concatenação:
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char destino[20] = "Ola, ";
+  char origem[] = "Mundo!";
+
+  strcat(destino, origem);
+  printf("%s\n", destino);
+
+  return 0;
+}
+5.6. Exercício
+Crie um programa em C que recebe o nome e o sobrenome de uma pessoa e mostra o nome completo usando apenas uma string com o comando:
+printf("Nome completo: %s\n", completo);
+5.7. Comparando
+A função strcmp() compara duas strings e retorna 0 se as duas forem iguais, menor que 0 se a primeira vier antes da segunda, maior que 0 se a primeira vier depois.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char primeira[] = "pera";
+  char segunda[] = "uva";
+  /* char segunda[] = "banana"; */
+  /* char segunda[] = "pera"; */        
+
+  int resultado = strcmp(primeira, segunda);
+
+  printf("Resultado: %d", resultado);
+
+  return 0;
+}
+Crie um programa em C que recebe uma senha de um usuário e se a senha for igual à palavra "azimo" mostre a mensagem: "Seja bem vindo!" e se o usuário errar a senha, mostre a mensagem: "Senha errada. Tentativas restantes: 2", se o usuário errar 3 vezes mostra a mensagem: "Tente novamente mais tarde".
+6. Envio
+https://forms.gle/GAxet1bGPQNqzU9t8
